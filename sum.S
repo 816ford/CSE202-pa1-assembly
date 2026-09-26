@@ -5,6 +5,18 @@
 #   offset 8  : value
 #   offset 16 : next
 sum:
+    movq $0, %rax            #%rax = total = 0
+    movq %rdi, %rsi          #%rsi = %rdi = pointer to list head
+.L1:
+    cmpq $0, %rsi            #%rsi - 0
+    je .L0                   #if pointer to list = null go to L0
+    addq 8(%rsi), %rax       #%rax = total + list.value
+    movq 16(%rsi), %rsi      #%rsi = list.next
+    jmp .L1                  #loop again
+
+
+
+.L0:
     retq
 
 
